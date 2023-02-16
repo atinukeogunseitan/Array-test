@@ -1,0 +1,32 @@
+When faced with SQL database performance issues like this, the first thing I want to do is get an ovrview of what is happeneing on my SQL Server at that time.
+To do this, I run sp_who_is_active, which is a light weight SQL utility that gives me an overview of all the processes running at that time. 
+I look out for a couple things when i run this:  Blocking sessions, long-running queries, wait stats.
+
+A. If there is a blocking session, then that can lead to  ripple effect of long running queries. So, I want to identify the blocking session, 
+what action it is trying to perform (modify, select etc), and based on the particular situation/context, after consulting with my application guys, 
+I sometimes get approval to kill that session and they can re-run it off hours.
+Once that session is killed, the remaining back-logged queries are able to complete in good time and that stops the long-running query situation.
+
+B. If there's a query that has been running for a very long time, often times, its  as a result of indexes. I want to look at the tables, 
+columns that are being queried, and see if it has indexes at all, or sufficient indexes to help that query.  
+I also run SP_BLITZCACHE, SP_BLITZINDEX at this point to see those resource intensive queries. 
+I check the execution plan of those queries, which shows me the cost distribution of how sql server is trying to run it.
+If for instance, i see a lot of table scans, it means there's no index on the table. If i see index scans, key lookup, RID lookup, 
+it signifies that there are indexes , but not sufficient for that query. So, I can craete new ones or modify the existing ones to INCLUDE the relevant columns 
+for that query e.g WHERE clause column.  Doing this helps often to make long-running queries run in shorter time. 
+
+C. Another thing I look out for qhen I run sp_whoisactive is the WAIT STATS that are prevalent. Lots of CX-PACKET waits for instance indicate issues with parallelism,
+in which case i can tweak the MAXDOP and cost threshold bsed on that particular environment. I can also add MAXDOP at the query level. 
+This often helps resolve the issue with parallelism.
+If I see lots of PAGE IO LATCH waits, it can signify problems with the IO Subsystem., caused by maybe too many physical reads, or high disk latency, 
+or even not enough indexes as mentioned above.
+If I see lots of LCK waits, it implies lots of locking going on, and sometimes tuning or re-writing a query helps it be more efficient in how it runs, 
+and prevents unnecessary blocking.
+
+D. sp_blitzindex shows me if i have indexes that need to be REBUILT or REORGANISED, based on the level of fragmentation
+(30 percent and above, I re-build. Below that, I re-organise the index). And that fixes the fragmentation.
+
+E. I also create TRACES and EXTENDED EVENTS as needed, to help me gather information to further assess SQL Server and determine what the underlying issue is. 
+
+These are a few of the things I do in SQL perfeormace tuning for long running queries. 
+
