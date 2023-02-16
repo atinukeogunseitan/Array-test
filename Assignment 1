@@ -1,0 +1,161 @@
+USE [testarray]
+GO
+
+/****** Object:  Table [dbo].[client]    Script Date: 2/15/2023 3:31:21 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[client](
+	[clientid] [int] NOT NULL,
+	[clientname] [varchar](50) NULL,
+ CONSTRAINT [PK_client] PRIMARY KEY CLUSTERED 
+(
+	[clientid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[client]  ADD  CONSTRAINT [FK_Client_order]
+FOREIGN KEY (clientid)
+REFERENCES [dbo].[Order] (clientid)	;
+
+
+
+
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Customer](
+	[Customerid] [int] NOT NULL,
+	[Firstname] [varchar](50) NULL,
+	[Lastname] [varchar](50) NULL,
+	[Address] [varchar](50) NULL,
+	[Email address] [varchar](50) NULL,
+	[Phone number] [int] NULL,
+ CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED 
+(
+	[Customerid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[customer]  ADD  CONSTRAINT [FK_Customer_order]
+FOREIGN KEY (customerid)
+REFERENCES [dbo].[Order] (customerid)	;
+
+
+
+
+USE [testarray]
+GO
+
+/****** Object:  Table [dbo].[category]    Script Date: 2/15/2023 8:40:43 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[category](
+	[Categoryid] [int] NOT NULL,
+	[Category] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_category] PRIMARY KEY CLUSTERED 
+(
+	[Categoryid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+
+USE [testarray]
+GO
+
+/****** Object:  Table [dbo].[Products]    Script Date: 2/15/2023 8:42:09 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Products](
+	[productid] [int] NOT NULL,
+	[Product name] [varchar](50) NULL
+) ON [PRIMARY]
+GO
+
+
+
+USE [testarray]
+GO
+
+/****** Object:  Table [dbo].[Product_category]    Script Date: 2/15/2023 8:42:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Product_category](
+	[Productid] [int] NOT NULL,
+	[Categoryid] [int] NOT NULL,
+	[Price] [money] NULL
+) ON [PRIMARY]
+GO
+
+
+
+
+USE [testarray]
+GO
+
+/****** Object:  Table [dbo].[Order]    Script Date: 2/15/2023 8:43:28 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Order](
+	[orderid] [int] NOT NULL,
+	[order_date] [date] NULL,
+	[CustomerID] [int] NOT NULL,
+	[ClientID] [int] NOT NULL,
+ CONSTRAINT [PK_Order] PRIMARY KEY CLUSTERED 
+(
+	[orderid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+
+USE [testarray]
+GO
+
+/****** Object:  Table [dbo].[order_details]    Script Date: 2/15/2023 8:44:11 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[order_details](
+	[orderid] [int] NOT NULL,
+	[productid] [int] NOT NULL,
+	[unitprice] [money] NULL,
+	[quantity] [int] NULL
+) ON [PRIMARY]
+GO
+
+
+
+
+
