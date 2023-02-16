@@ -1,12 +1,7 @@
 USE [testarray]
 GO
 
-/****** Object:  Table [dbo].[client]    Script Date: 2/15/2023 3:31:21 PM ******/
-SET ANSI_NULLS ON
-GO
 
-SET QUOTED_IDENTIFIER ON
-GO
 
 CREATE TABLE [dbo].[client](
 	[clientid] [int]  IDENTITY (1,1)    NOT NULL,
@@ -25,11 +20,7 @@ REFERENCES [dbo].[Order] (clientid)	;
 
 
 
-
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
+USE [testarray]
 GO
 
 CREATE TABLE [dbo].[Customer](
@@ -56,13 +47,6 @@ REFERENCES [dbo].[Order] (customerid)	;
 USE [testarray]
 GO
 
-/****** Object:  Table [dbo].[category]    Script Date: 2/15/2023 8:40:43 PM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE TABLE [dbo].[category](
 	[Categoryid] [int] IDENTITY (1,1)  NOT NULL,
 	[Category] [varchar](50) NOT NULL,
@@ -76,13 +60,6 @@ GO
 
 
 USE [testarray]
-GO
-
-/****** Object:  Table [dbo].[Products]    Script Date: 2/15/2023 8:42:09 PM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Products](
@@ -100,13 +77,6 @@ REFERENCES [dbo].[Order] (ProductID)	;
 USE [testarray]
 GO
 
-/****** Object:  Table [dbo].[Product_category]    Script Date: 2/15/2023 8:42:52 PM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE TABLE [dbo].[Product_category](
 	[Productid] [int] IDENTITY (1,1)  NOT NULL,
 	[Categoryid] [int] NOT NULL,
@@ -119,14 +89,6 @@ GO
 
 USE [testarray]
 GO
-
-/****** Object:  Table [dbo].[Order]    Script Date: 2/15/2023 8:43:28 PM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE TABLE [dbo].[Order](
 	[orderid] [int] IDENTITY (1,1)  NOT NULL,
 	[order_date] [date] NULL,
@@ -143,13 +105,6 @@ GO
 
 
 USE [testarray]
-GO
-
-/****** Object:  Table [dbo].[order_details]    Script Date: 2/15/2023 8:44:11 PM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[order_details](
