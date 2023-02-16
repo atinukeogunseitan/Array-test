@@ -9,7 +9,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[client](
-	[clientid] [int] NOT NULL,
+	[clientid] [int]  IDENTITY (1,1)    NOT NULL,
 	[clientname] [varchar](50) NULL,
  CONSTRAINT [PK_client] PRIMARY KEY CLUSTERED 
 (
@@ -33,7 +33,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Customer](
-	[Customerid] [int] NOT NULL,
+	[Customerid] [int] IDENTITY (1,1)  NOT NULL,
 	[Firstname] [varchar](50) NULL,
 	[Lastname] [varchar](50) NULL,
 	[Address] [varchar](50) NULL,
@@ -64,7 +64,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[category](
-	[Categoryid] [int] NOT NULL,
+	[Categoryid] [int] IDENTITY (1,1)  NOT NULL,
 	[Category] [varchar](50) NOT NULL,
  CONSTRAINT [PK_category] PRIMARY KEY CLUSTERED 
 (
@@ -86,10 +86,14 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Products](
-	[productid] [int] NOT NULL,
-	[Product name] [varchar](50) NULL
+	[productid] [int] IDENTITY (1,1)  NOT NULL,
+	[Product_name] [varchar](50) NULL
 ) ON [PRIMARY]
 GO
+
+ALTER TABLE [dbo].[Product]  ADD  CONSTRAINT [FK_Product_order]
+FOREIGN KEY (Productid)
+REFERENCES [dbo].[Order] (ProductID)	;
 
 
 
@@ -104,7 +108,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Product_category](
-	[Productid] [int] NOT NULL,
+	[Productid] [int] IDENTITY (1,1)  NOT NULL,
 	[Categoryid] [int] NOT NULL,
 	[Price] [money] NULL
 ) ON [PRIMARY]
@@ -124,9 +128,10 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Order](
-	[orderid] [int] NOT NULL,
+	[orderid] [int] IDENTITY (1,1)  NOT NULL,
 	[order_date] [date] NULL,
 	[CustomerID] [int] NOT NULL,
+	[ProductID] [int] NOT NULL,
 	[ClientID] [int] NOT NULL,
  CONSTRAINT [PK_Order] PRIMARY KEY CLUSTERED 
 (
@@ -148,7 +153,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[order_details](
-	[orderid] [int] NOT NULL,
+	[orderid] [int] IDENTITY (1,1)  NOT NULL,
 	[productid] [int] NOT NULL,
 	[unitprice] [money] NULL,
 	[quantity] [int] NULL
