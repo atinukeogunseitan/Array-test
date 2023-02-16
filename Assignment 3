@@ -1,12 +1,13 @@
-There are a couple options for importing csv files into SQL Server tables.  I have used SSIS and Pentaho etc for this purpose.
+There are a couple options for importing csv files into SQL Server tables.  I have used SSIS and Pentaho, among other tools, for this purpose.
 For instance, if using Pentaho as a tool for this. 
-Step 1. I would validate the csv file contents, see what columns the file contains and compare to our dbo.customer table columns.
+Step 1. I would validate the csv file contents, see what columns the file contains and compare to our DBO.CUSTOMER table columns.
 Compare the data types etc, to see if it matches directly, or any data transformation is needed first for the csv file from the customer, before loading. 
 This process is called ETL (Extract Transform Load).
 
 Step 2. Depending on what columns are present in the client file, I would pick the ones that match our table columns - firstname, lastname, Address, Phone number, Email.
 Determine if any transformation is needed e.g splitting 1 name column in csv file into 2 columns in our table - (firstname and lastname) using the space as a break. etc. 
 
-Step 3. After completing the transformations, I would do a preview of say 10o rows of data to see what it looks like, and if any further cleanup needs to be done.
+Step 3. After completing the transformations, I would do a preview of say 100 rows of data to see what it looks like, and if any further cleanup needs to be done, 
+before loading into the table.
 
-Step 4. Import the data into dbo.customers table. N.B: The customerid column is an Identity column, so it will generate itself, and the value doesnt need to be provided. 
+Step 4. Import the data into dbo.customers table. (N.B: The customerid column is an Identity column, so it will generate itself, and the value doesnt need to be provided. )
