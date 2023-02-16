@@ -2,7 +2,7 @@ WITH Order_CTE ( Clientname, ClientID )
 AS 
 (
 SELECT cl.clientname, COUNT(o.clientid) AS COUNT
-FROM [dbo].[Order] o JOIN dbo.client cl ON o.clientid = cl.clientid
+FROM dbo.Order o JOIN dbo.client cl ON o.clientid = cl.clientid
 GROUP BY cl.clientname
 HAVING COUNT > 100
 )
