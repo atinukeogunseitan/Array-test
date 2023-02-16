@@ -1,4 +1,4 @@
-When faced with SQL database performance issues like this, the first thing I want to do is get an ovrview of what is happeneing on my SQL Server at that time.
+When faced with SQL database performance issues like this, the first thing I want to do is get an ovrview of what is happening on my SQL Server at that time.
 To do this, I run sp_who_is_active, which is a light weight SQL utility that gives me an overview of all the processes running at that time. 
 I look out for a couple things when i run this:  Blocking sessions, long-running queries, wait stats.
 
