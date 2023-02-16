@@ -5,6 +5,6 @@ from dbo.Order o join
 dbo.Products p on p.productid = o.productid
 join dbo.client cl on cl.clientid = o.clientid
 where product_name = 'Transunion'
-GROUP BY cl.clientname
+GROUP BY cl.clientname,
 DATEPART(YEAR, o.order_date) AS year,
 DATEPART(MONTH, o.order_date) AS month
